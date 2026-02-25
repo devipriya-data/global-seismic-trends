@@ -1,0 +1,5 @@
+.DS_Store
+*.pages
+Token*
+__pycache__/
+*.pyc
