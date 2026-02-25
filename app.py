@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import mysql.connector
 
 # Page configuration
 st.set_page_config(
@@ -14,16 +13,8 @@ st.title("🌍 Global Seismic Trends: Data-Driven Earthquake Insights")
 st.markdown("**Analyzing 95,693 earthquakes from 2020 to 2025**")
 st.markdown("---")
 
-# Connect to MySQL
-conn = mysql.connector.connect(
-    host="127.0.0.1",
-    user="root",
-    password="root123",
-    database="earthquake_db"
-)
-
-st.subheader("📋 All 30 SQL Queries with Results")
-st.info("Click any query below to see the SQL code and results!")
+st.subheader("📋 All 30 SQL Queries")
+st.info("Click any query below to see the SQL code!")
 
 queries = {
     "Q1: Top 10 Strongest Earthquakes": "SELECT id, place, mag, time, country FROM earthquakes ORDER BY mag DESC LIMIT 10",
@@ -61,10 +52,6 @@ queries = {
 for query_name, query_sql in queries.items():
     with st.expander(f"🔍 {query_name}"):
         st.code(query_sql, language="sql")
-        result = pd.read_sql(query_sql, conn)
-        st.dataframe(result, use_container_width=True)
-
-conn.close()
 
 # Footer
 st.markdown("---")
